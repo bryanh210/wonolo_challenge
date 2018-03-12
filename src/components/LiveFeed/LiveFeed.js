@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './LiveFeed.css';
-import LiveFeedHeader from './LiveFeed_Header'
+import LiveFeedHeader from './LiveFeed_Header';
+import {WonoloToken} from '../config';
+import WonoloerSignUp from './LiveFeed_Businesses/Signup_individuals';
+
 
 class LiveFeed extends Component {
   state = {
@@ -25,6 +28,10 @@ class LiveFeed extends Component {
 
 
 componentDidMount(){
+  // create a server to store this
+  // console.log(WonoloToken);
+
+  // get geoLocation
   let getPosition = (options) => {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
@@ -38,18 +45,22 @@ getPosition().
       longitude: position.coords.longitude,
       latitude: position.coords.latitude
     })
-
-    console.log(position);
-    console.log(position.coords.longitude);
-    console.log(position.coords.latitude);
   })
-  // catch error here
 
 }
 
 
   render() {
-    // will replace in your area with live feed header
+    const {gotlocation, longitude, latitude, peoplesignup, wonoloer1, amount1, job1, wonoloer2, amount2, job2, activejob, business1, businesspay1, business2, businesspay2 } = this.state;
+
+    if(gotlocation === false){
+      return(
+        <div>
+          Please wait a moment...
+        </div>
+      )
+    }
+
     return (
       <nav className="navbar navbar-light bg-light">
         <LiveFeedHeader/>
