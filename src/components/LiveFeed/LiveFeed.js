@@ -29,7 +29,7 @@ class LiveFeed extends Component {
 
 componentDidMount(){
   // create a server to store this
-  // console.log(WonoloToken);
+  console.log(WonoloToken);
 
   // get geoLocation
   let getPosition = (options) => {
