@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 
 
-class LFHeader extends Component {
-
-
-  render() {
+const LFHeader = () => {
     return (
       <nav className="navbar navbar-light bg-light">
-        IN YOUR AREA -
+        IN YOUR AREA:
       </nav>
     );
-  }
+
 }
 
 export default LFHeader;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './LiveFeed.css';
-import LiveFeedHeader from './LiveFeed_Header'
+import LiveFeedHeader from './LiveFeed_Header';
+import Config from '../config/config';
+
 
 class LiveFeed extends Component {
   state = {
