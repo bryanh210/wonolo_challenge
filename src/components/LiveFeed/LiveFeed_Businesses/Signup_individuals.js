@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-const SignupIndividuals = () => {
+const WonoloerSignUp = ({wonoloer,amount,job}) => {
     return (
       <nav className="navbar navbar-light bg-light">
-        
+        {wonoloer} just made ${amount} from {job}!
       </nav>
     );
 
 }
 
-export default SignupIndividuals;
+export default WonoloerSignUp;

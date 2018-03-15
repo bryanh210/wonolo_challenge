@@ -4,25 +4,26 @@ import LiveFeedHeader from './LiveFeed_Header';
 import {WonoloToken, googleAPIkey} from '../config';
 import axios from 'axios';
 import querystring from 'querystring';
-import WonoloerSignUp from './LiveFeed_Businesses/Signup_individuals';
+
+// import NewJob from './LiveFeed_Businesses/LiveFeed_Wonoloers';
+// import ActiveJobs from './LiveFeed_Wonoloers/Activejobs';
+// import NewJob from './LiveFeed_Wonoloers/newjobs';
+// // import SignupNumber from './LiveFeed_Businesses/LiveFeed_Businesses';
+// import SignUpIndividuals from './LiveFeedBusiness/Signup_individuals';
+// import SignupNumber from './LiveFeedBusiness/SignupNumber.js';
 
 
 class LiveFeed extends Component {
 
     state = {
       city: '',
-      peoplesignup: 0,
-      wonoloer1: '',
-      amount1: 0,
-      job1: '',
-      wonoloer2: '',
-      amount2: 0,
-      job2: '',
+      nowonoloersignup: 0,
+      wonoloer: 'Bryan',
+      amount: 0,
+      job: 'event planning',
       activejob: 0,
-      business1: '',
-      businesspay1: 0,
-      business2: '',
-      businesspay2: 0,
+      business: 'Target',
+      businesspay: 0
     }
 
 
@@ -78,24 +79,28 @@ getPosition().
   render() {
     const {
       city,
-      peoplesignup,
-      wonoloer1,
-      amount1,
-      job1,
-      wonoloer2,
-      amount2,
-      job2,
+      nowonoloersignup,
+      wonoloer,
+      amount,
+      job,
       activejob,
-      business1,
-      businesspay1,
-      business2,
-      businesspay2} = this.state;
+      business,
+      businesspay
+    } = this.state;
+
 
 
     return (
       <nav className="navbar navbar-light bg-light">
-        <LiveFeedHeader city={this.state.city}/>
-        <WonoloerSignUp/>
+        <LiveFeedHeader city={city}
+          nowonoloersignup={nowonoloersignup}
+          wonoloer={wonoloer}
+          amount={amount}
+          job={job}
+          activejob={activejob}
+          business={business}
+          businesspay={businesspay}
+      />
 
       </nav>
     );
