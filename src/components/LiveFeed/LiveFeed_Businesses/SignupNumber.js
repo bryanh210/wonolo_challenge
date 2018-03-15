@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const SignupNumber = ({nowonoloersignup}) => {
+export const SignupNumber = ({nowonoloersignup}) => {
   console.log(nowonoloersignup)
     return (
       <nav className="navbar navbar-light bg-light">
@@ -9,5 +9,3 @@ const SignupNumber = ({nowonoloersignup}) => {
     );
 
 }
-
-export default SignupNumber;

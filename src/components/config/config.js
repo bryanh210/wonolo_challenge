@@ -14,19 +14,18 @@ export const WonoloToken = axios.post(url, querystring.stringify({
         "Content-Type": "application/x-www-form-urlencoded"
       }
 })
-.then(function (response) {
-    // console.log(response.data);
+.then((response) => {
     let token = response.data.token;
-    // if (!token || token === 'undefined') token = 'xHtzzW5UT9CbYQf7HNhS';
     localStorage.setItem('Token', token);
   })
-  .catch(function (error) {
+  .catch((error) => {
     console.log(error.response);
   });
 
 // Google map api
 
 export const googleAPIkey = 'AIzaSyBazeQ2f_Ao-xQAI7IDyQxzKCyyzzkckFY';
+export const Token = localStorage.Token;
 
 
 

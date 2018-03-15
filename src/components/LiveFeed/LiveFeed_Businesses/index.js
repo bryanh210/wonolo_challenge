@@ -1,4 +1,21 @@
-import WonoloerSignUp from './Signup_individuals';
-import SignupNumber from './Signup_number';
+import React from 'react';
 
-export default LiveFeedBusiness;
+export const WonoloerSignUp = ({jobscompleted}) => {
+    return (
+      <nav className="navbar navbar-light bg-light">
+        {jobscompleted} jobs have been completed!
+      </nav>
+    );
+
+}
+
+
+export const SignupNumber = ({nowonoloersignup}) => {
+  console.log(nowonoloersignup)
+    return (
+      <nav className="navbar navbar-light bg-light">
+        {nowonoloersignup} Wonoloers have signed up!
+      </nav>
+    );
+
+}

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const WonoloerSignUp = ({wonoloer,amount,job}) => {
+export const WonoloerSignUp = ({wonoloer,amount,job}) => {
     return (
       <nav className="navbar navbar-light bg-light">
         {wonoloer} just made ${amount} from {job}!
@@ -8,5 +8,3 @@ const WonoloerSignUp = ({wonoloer,amount,job}) => {
     );
 
 }
-
-export default WonoloerSignUp;
