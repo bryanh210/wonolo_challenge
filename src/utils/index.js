@@ -1,6 +1,6 @@
 import axios from 'axios';
 import querystring from 'querystring';
-import React, { Component } from 'react';
+
 
 //wonolo api key
 const url = 'https://test.wonolo.com/api_v2/authenticate';

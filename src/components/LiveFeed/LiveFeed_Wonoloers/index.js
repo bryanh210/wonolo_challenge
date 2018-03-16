@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export const ActiveJobs = ({activejobs}) => {
     return (
@@ -17,7 +17,7 @@ export const NewJob = ({job, amount}) => {
   }
     return (
       <div>
-        A business has just posted {prefix} <b>{job}</b> job for $<b>{amount}</b>!
+        A business has just posted {prefix} <em>{job}</em> job for $<b>{amount}</b>!
       </div>
     );
 }

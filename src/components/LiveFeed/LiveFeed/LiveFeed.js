@@ -68,13 +68,15 @@ fetchRequest = (string) =>{
         const userCityLowerCase = userCity.toLowerCase();
         axios.get(url, {
           params: {
-            token: localStorage.Token
+            token: Token
           }
         }).then(response =>{
             const data = response.data["users"];
-            //filter jobs based on location
+            //filter users based on type & city
             const filteredUsers = data.filter(item =>{
-              return (item.city === userCity ||item.city === userCityLowerCase && item.type === "Worker");
+              return (item.type === "Worker");
+            }).filter(item =>{
+                return (item.city === userCity ||item.city === userCityLowerCase);
             })
             const signups = filteredUsers.length;
             this.setState({
@@ -187,12 +189,12 @@ componentDidMount(){
         </h2>
           <div className="modal-body row">
               <div className="col-md-6">
-          <SignupNumber signups={signups} />
-          <WonoloerSignUp jobscompleted={jobscompleted}  />
+                <SignupNumber signups={signups} />
+                <WonoloerSignUp jobscompleted={jobscompleted}/>
               </div>
               <div className="col-md-6">
-          <ActiveJobs activejobs={activejobs}/>
-          <NewJob job={job} amount={payamount}/>
+                <ActiveJobs activejobs={activejobs}/>
+                <NewJob job={job} amount={payamount}/>
               </div>
         </div>
       </div>
