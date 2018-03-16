@@ -6,7 +6,6 @@ export const ActiveJobs = ({activejobs}) => {
         There are <b>{activejobs}</b> active job requests!
       </div>
     );
-
 }
 
 export const NewJob = ({job, amount}) => {
@@ -21,7 +20,4 @@ export const NewJob = ({job, amount}) => {
         A business has just posted {prefix} <b>{job}</b> job for $<b>{amount}</b>!
       </div>
     );
-
 }
-
-export default NewJob;

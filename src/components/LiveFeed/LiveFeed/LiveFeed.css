@@ -1,28 +1,38 @@
-
+/*For mobile */
 body {
   margin: 0;
   padding: 0;
   font-family: "Open Sans";
-  font-size: 21px;
+  font-size: 13px;
   font-weight: 400;
   hyphens: auto;
   text-size-adjust: 100px
 }
-
 img{
   width: 100%;
 }
-
 .livefeed{
   display: block;
-  padding: 39px;
-  line-height: 50px;
+  padding: 25px;
+  line-height: 35px;
 }
-
 .livefeed:hover{
   transform: scale(1.1);
 }
-
 .title{
   text-align: center;
+}
+
+/*For tablets */
+@media only screen and (min-width: 600px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+/* For desktop */
+@media only screen and (min-width: 768px) {
+  body {
+    font-size: 21px;
+  }
 }

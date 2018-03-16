@@ -6,9 +6,7 @@ export const WonoloerSignUp = ({jobscompleted}) => {
         <b>{jobscompleted}</b> jobs have been completed!
       </div>
     );
-
 }
-
 
 export const SignupNumber = ({signups}) => {
     return (

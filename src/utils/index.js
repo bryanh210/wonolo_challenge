@@ -22,12 +22,11 @@ export const WonoloToken = axios.post(url, querystring.stringify({
   .catch((error) => {
     console.log(error.response);
   });
-export const Token = localStorage.Token;
 
+export const Token = localStorage.Token;
 
 // Google map api key
 export const googleAPIkey = 'AIzaSyBazeQ2f_Ao-xQAI7IDyQxzKCyyzzkckFY';
-
 
 export const fetchLocation = (latlng, key) => {
   let city;

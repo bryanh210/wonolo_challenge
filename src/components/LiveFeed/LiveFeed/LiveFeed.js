@@ -5,20 +5,18 @@ import {Token, googleAPIkey} from '../../../utils';
 import {WonoloerSignUp,SignupNumber} from '../LiveFeed_Businesses';
 import {ActiveJobs, NewJob} from '../LiveFeed_Wonoloers';
 
-
-
 class LiveFeed extends Component  {
       state = {
         geocoder: true,
-        city: 'updating...',
-        signups: '',
-        jobscompleted: '',
+        city: '',
+        signups: 0,
+        jobscompleted: 0,
         payamount: '',
-        job: '',
-        activejobs: ''
+        job: 0,
+        activejobs: 0
       }
 
-      //get current location
+//get current location
 fetchLocation = (latlng, key) => {
   let city;
   let googleurl = 'https://maps.googleapis.com/maps/api/geocode/json';
@@ -29,16 +27,15 @@ fetchLocation = (latlng, key) => {
     }
   })
   .then(response =>{
-        city = response.data.results[0]["address_components"][3]["long_name"];
-        console.log(city)
-        this.setState({
-          gotlocation: true,
-          city: city
-        })
-      })
+    city = response.data.results[0]["address_components"][3]["long_name"];
+    this.setState({
+      geocoder: true,
+      city: city
+    })
+  })
 }
 
-// based on type of request, a certain url is fetched up
+//based on string, app will fetch the correct url from Wonolo's API
 fetchRequest = (string) =>{
   let url;
     switch(string){
@@ -53,7 +50,7 @@ fetchRequest = (string) =>{
         //filter jobs based on location
         const filteredJobs = data.filter(item =>{
           return item.city === this.state.city;
-        })
+        });
         const activejobs = filteredJobs.length;
         const payamount = filteredJobs[0].wage;
         const job = filteredJobs[0].category;
@@ -61,16 +58,14 @@ fetchRequest = (string) =>{
           payamount: payamount,
           activejobs: activejobs,
           job: job
-        })
-      })
+        });
+      });
     break;
 
     case 'userRequest':
         url = 'https://test.wonolo.com/api_v2/users';
         const userCity = this.state.city.slice();
-        console.log(userCity);
         const userCityLowerCase = userCity.toLowerCase();
-        console.log(userCityLowerCase);
         axios.get(url, {
           params: {
             token: localStorage.Token
@@ -84,10 +79,9 @@ fetchRequest = (string) =>{
             const signups = filteredUsers.length;
             this.setState({
               signups: signups
-            })
-          })
+            });
+          });
         break;
-
 
     case 'jobsPerformed':
         url = 'https://test.wonolo.com/api_v2/jobs';
@@ -99,27 +93,26 @@ fetchRequest = (string) =>{
           }
         }).then(response =>{
             const data = response.data["jobs"];
-
             //filter jobs based on location
             const filteredFinishedJobs = data.filter(item =>{
               return (item.worker.city === workerCity ||item.worker.city === workerCityLowerCase);
-            })
+            });
             const jobscompleted = filteredFinishedJobs.length;
             this.setState({
               jobscompleted: jobscompleted
-            })
-          })
+            });
+          });
         break;
 
     default:
-      throw new Error("No url available")
-  }
-}
+      throw new Error("No url available");
+  };
+};
 
 generatePayAmount = () =>{
   const num = Math.floor(Math.random() * 250);
   return num < 100? 100 : num
-}
+};
 
 updateStatistics = () =>{
   const jobBank = ["warehouse", "delivery", "general labor", "administrative", "event staff", "merchandising"];
@@ -130,9 +123,9 @@ updateStatistics = () =>{
     jobscompleted: this.state.jobscompleted +1,
     payamount: payamount,
     job: jobBank[randomIndex],
-    activejobs: this.state.payamount +1,
+    activejobs: this.state.activejobs +1,
   })
-}
+};
 
 componentDidMount(){
     let getPosition;
@@ -141,7 +134,7 @@ componentDidMount(){
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, options);
       });
-    }
+    };
     getPosition()
     .then((position) =>{
       const lng = position.coords.longitude;
@@ -150,16 +143,21 @@ componentDidMount(){
       this.fetchLocation(latlng, googleAPIkey)
       })
     .then(()=>{
-      this.fetchRequest('userRequest');
-      this.fetchRequest('jobsPerformed');
-      this.fetchRequest('jobRequested');
+      setTimeout(() =>{
+        this.fetchRequest('userRequest');
+        this.fetchRequest('jobsPerformed');
+        this.fetchRequest('jobRequested');
+      },400)
       setInterval(() =>{
         this.updateStatistics();
       }, 5000);
     })
+  }else{
+    this.setState({
+      geocoder: false
+    })
   }
-}
-
+};
 
     render() {
       const {
@@ -171,6 +169,17 @@ componentDidMount(){
         job,
         activejobs
       } = this.state;
+
+      if(geocoder === false){
+        return(
+          <div className="livefeed">
+            <h2>
+            Your browser doesn't allow geocoding. Please use Chrome instead.
+            </h2>
+          </div>
+        )
+      }
+
       return (
       <div className="livefeed">
         <h2 className="title">
@@ -188,7 +197,6 @@ componentDidMount(){
         </div>
       </div>
     );
-
   }
 }
 export default LiveFeed;
