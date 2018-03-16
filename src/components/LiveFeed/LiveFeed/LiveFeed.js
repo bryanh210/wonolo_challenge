@@ -152,7 +152,7 @@ componentDidMount(){
       },400);
       setInterval(() =>{
         this.updateStatistics();
-      }, 5000);
+      }, 3500);
     })
   }else{
     this.setState({
