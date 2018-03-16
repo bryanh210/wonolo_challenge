@@ -196,7 +196,7 @@ componentDidMount(){
                 <ActiveJobs activejobs={activejobs}/>
                 <NewJob job={job} amount={payamount}/>
               </div>
-        </div>
+          </div>
       </div>
     );
   }
