@@ -149,7 +149,7 @@ componentDidMount(){
         this.fetchRequest('userRequest');
         this.fetchRequest('jobsPerformed');
         this.fetchRequest('jobRequested');
-      },400)
+      },400);
       setInterval(() =>{
         this.updateStatistics();
       }, 5000);
