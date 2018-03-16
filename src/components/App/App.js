@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LiveFeed from '../LiveFeed/LiveFeed.js';
+import LiveFeed from '../LiveFeed/LiveFeed/LiveFeed.js';
 // import Header from '../Header/Header.js';
 import './App.css';
 

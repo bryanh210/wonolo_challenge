@@ -2,20 +2,19 @@ import React from 'react';
 
 export const WonoloerSignUp = ({jobscompleted}) => {
     return (
-      <nav className="navbar navbar-light bg-light">
+      <div>
         {jobscompleted} jobs have been completed!
-      </nav>
+      </div>
     );
 
 }
 
 
-export const SignupNumber = ({nowonoloersignup}) => {
-  console.log(nowonoloersignup)
+export const SignupNumber = ({signups}) => {
     return (
-      <nav className="navbar navbar-light bg-light">
-        {nowonoloersignup} Wonoloers have signed up!
-      </nav>
+      <div>
+        {signups} Wonoloers have signed up!
+      </div>
     );
 
 }

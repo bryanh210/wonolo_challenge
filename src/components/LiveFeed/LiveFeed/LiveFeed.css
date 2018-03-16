@@ -3,10 +3,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Open Sans";
-  font-size: 16px;
+  font-size: 21px;
   font-weight: 400;
   hyphens: auto;
-  line-height: 23px;
   text-size-adjust: 100px
 }
 
@@ -14,11 +13,16 @@ img{
   width: 100%;
 }
 
-
-.front-page-display{
-  display: inline-block;
+.livefeed{
+  display: block;
+  padding: 39px;
+  line-height: 50px;
 }
 
-.front-page-display:hover{
-   transform: scale(1.1);
-  }
+.livefeed:hover{
+  transform: scale(1.1);
+}
+
+.title{
+  text-align: center;
+}

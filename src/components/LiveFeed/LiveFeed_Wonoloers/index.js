@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
-export const ActiveJobs = ({activejob}) => {
+export const ActiveJobs = ({activejobs}) => {
     return (
-      <nav className="navbar navbar-light bg-light">
-        There are {activejob} active job requests!
-      </nav>
+      <div>
+        There are {activejobs} active job requests!
+      </div>
     );
 
 }
 
 export const NewJob = ({job, amount}) => {
+
   job = job.toLowerCase();
   let prefix;
 
@@ -19,9 +20,9 @@ export const NewJob = ({job, amount}) => {
     prefix = "a"
   }
     return (
-      <nav className="navbar navbar-light bg-light">
+      <div>
         A business has just posted {prefix} {job} job for ${amount}!
-      </nav>
+      </div>
     );
 
 }

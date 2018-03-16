@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import '../LiveFeed.css';
-import {Token, googleAPIkey} from '../../config';
+import './LiveFeed.css';
 import axios from 'axios';
+import {Token, googleAPIkey} from '../../../utils';
 import {WonoloerSignUp,SignupNumber} from '../LiveFeed_Businesses';
 import {ActiveJobs, NewJob} from '../LiveFeed_Wonoloers';
-import _ from 'lodash';
 
-
-class LiveFeedHeader extends Component  {
-
+class LiveFeed extends Component  {
       state = {
+        geocoder: true,
         city: 'updating...',
-        nowonoloersignup: '',
-        wonoloer: '',
+        signups: '',
         jobscompleted: '',
-        //payamount
-        amount: '',
+        payamount: '',
         job: '',
-        activejob: '' ,
-        business: '',
+        activejobs: ''
       }
 // simplify wonoloJobrequest (switch each case for each function?)
 //put all of these to utils
@@ -36,13 +31,13 @@ JobRequested = () =>{
         return item.city === this.state.city;
       })
 
-      const activejob = filteredJobs.length;
-      const amount = filteredJobs[0].wage;
+      const activejobs = filteredJobs.length;
+      const payamount = filteredJobs[0].wage;
       const job = filteredJobs[0].category;
 
       this.setState({
-        amount: amount,
-        activejob: activejob,
+        payamount: payamount,
+        activejobs: activejobs,
         job: job
       })
     })
@@ -65,10 +60,10 @@ wonoloUserRequest = () =>{
         return (item.city === userCity ||item.city === userCityLowerCase && item.type === "Worker");
       })
 
-      const nowonoloersignup = filteredUsers.length;
+      const signups = filteredUsers.length;
 
       this.setState({
-        nowonoloersignup: nowonoloersignup
+        signups: signups
       })
     })
 }
@@ -99,16 +94,17 @@ jobsPerformed = () =>{
 }
 
 setZero = () =>{
-  this.setState({
-    nowonoloersignup: '',
-    wonoloer: '',
-    jobscompleted: '',
-    //payamount
-    amount: '',
-    job: '',
-    activejob: '' ,
-    business: '',
-  })
+// create counter that increases wonoloer by the second
+
+  // this.setState({
+  //   nowonoloersignup: newState.nowonoloersignup++,
+  //   wonoloer: newState.wonoloer++,
+  //   jobscompleted: newState.jobscompleted++,
+  //   //payamount
+  //   amount: newState.wonoloer++,
+  //   job: '',
+  //   activejob: newState.wonoloer++
+  // })
 }
 
   componentDidMount(){
@@ -163,56 +159,55 @@ setZero = () =>{
       })
   }
     else{
-      console.log('Error: Browser does not support geolocation')
+      this.setState({
+        geocoder: false,
+        city: 'unable to fetch geocoder'
+      })
     }
   }
 
 
     render() {
       const {
+        geocoder,
         city,
-        //rename
-        nowonoloersignup,
-        wonoloer,
+        signups,
         jobscompleted,
-        amount,
+        payamount,
         job,
-        activejob,
-        business,
-        businesspay
+        activejobs
       } = this.state;
 
-      // const refresh = _.debounce(() => {this.setZero()}, 300)
+      if(geocoder === false){
+        return(
+          <div>
+            <h2 className="title">
+            <div>
+            Your browser doesn't support Geocoding. Please use Google Chrome to see live feed.
+            </div>
+            </h2>
+          </div>
+        )
+      }
 
       return (
-      <div>
-      <h2 className="title">
-      <nav className="navbar navbar-light bg-light title">
-        In your area: {city}
-      </nav>
-      </h2>
-
-      <div className="front-page-display" >
-      {/* {nowonoloersignup} have signed up!
-      <br/>
-      {jobscompleted} jobs have been completed!
-      <br/>
-      A business has just posted a {job} job for ${amount}!
-      <br/>
-      There are {activejob} active job requests! */}
-
-      <SignupNumber nowonoloersignup={nowonoloersignup} />
-
-      <WonoloerSignUp jobscompleted={jobscompleted}  />
-
-      <ActiveJobs activejob={activejob}/>
-
-      <NewJob business={business} job={job} amount={amount}/>
+      <div className="livefeed">
+        <h2 className="title">
+          In your area: {city}
+        </h2>
+          <div className="modal-body row">
+              <div className="col-md-6">
+          <SignupNumber signups={signups} />
+          <WonoloerSignUp jobscompleted={jobscompleted}  />
+              </div>
+              <div className="col-md-6">
+          <ActiveJobs activejobs={activejobs}/>
+        <NewJob job={job} amount={payamount}/>
+              </div>
+        </div>
       </div>
-
-    </div>
     );
 
   }
 }
-export default LiveFeedHeader;
+export default LiveFeed;
